@@ -1,0 +1,73 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<dom-module id="pl-github-profile">
+  <template>
+      <iron-ajax id="ajax"
+      url="https://api.github.com/users/{{username}}"
+      handle-as="json"
+      on-response="onResponse" auto></iron-ajax>
+    <img src="{{img}}"/><br/>
+    {{name}}   @{{login}}
+    <p>{{bio}}</p>
+    <b>{{orgs}}</b>
+    {{repos}}
+    {{followers}}
+    {{following}}
+  </template>
+
+  <script>
+    /**
+     * `pl-github-profile`
+     * a pre defined element to see a profile with the best informations on github
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+     Polymer({
+        is: 'pl-github-profile',
+        properties: {
+          img: {
+            type: String
+          },
+          orgs: {
+            type: String
+          },
+          repos: {
+            type: String
+          },
+          bio: {
+            type: String
+          },
+          followers: {
+            type: String
+          },
+          following: {
+            type: String
+          },
+          name: {
+            type: String
+          },
+          login: {
+            type: String
+          },
+          username:{
+            type:String
+          }
+          
+        },
+        onResponse: function(response) {
+          console.log(response.detail.response)
+          this.set('img',response.detail.response.avatar_url)
+          this.set('orgs',response.detail.response.company)
+          this.set('repos',response.detail.response.public_repos)
+          this.set('bio',response.detail.response.bio)
+          this.set('followers',response.detail.response.followers)
+          this.set('following',response.detail.response.following)
+          this.set('name',response.detail.response.name)
+          this.set('login',response.detail.response.login)                    
+        }
+      });
+
+  </script>
+</dom-module>
