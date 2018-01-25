@@ -9,8 +9,19 @@
          
 <dom-module id="pl-github-profile">
   <template>
+      <div id="carregando" class="preloader-wrapper small active">
+          <div class="spinner-layer spinner-green-only">
+            <div class="circle-clipper left">
+              <div class="circle"></div>
+            </div><div class="gap-patch">
+              <div class="circle"></div>
+            </div><div class="circle-clipper right">
+              <div class="circle"></div>
+            </div>
+          </div>
+        </div>
       <iron-ajax id="ajax" url="https://api.github.com/users/{{username}}" handle-as="json" on-response="onResponse" auto=""></iron-ajax>
-    <div class="row">
+    <div id="card" class="row" style="display:none;">
     <div class="col s12 m3">
       <div class="card">
         <div class="card-image">
@@ -26,8 +37,7 @@
             <div class="col s4"><i class="material-icons">supervisor_account</i>{{followers}}</div>
             <div class="col s4"><i class="material-icons">perm_identity</i>{{following}}</div>  
           </div>
-          </div>
-        
+          </div> 
       </div>
     </div>
   </div>
@@ -77,7 +87,8 @@
           
         },
         onResponse: function(response) {
-          console.log(response.detail.response)
+          document.getElementById('carregando').style.display='none';
+          document.getElementById('card').style.display='unset';
           this.set('img',response.detail.response.avatar_url)
           this.set('orgs',response.detail.response.company)
           this.set('repos',response.detail.response.public_repos)
