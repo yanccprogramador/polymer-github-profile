@@ -1,6 +1,6 @@
 {
   "name": "pl-github-profile",
-  "description": "a pre defined element to see a profile with the best informations on github",
+  "description": "A pre defined element to see a profile with the best informations of github",
   "main": "pl-github-profile.html",
   "dependencies": {
     "polymer": "Polymer/polymer#^2.0.0"
