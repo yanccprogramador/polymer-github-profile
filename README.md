@@ -24,8 +24,10 @@ A pre defined element to see a profile with the best informations of github
 
 # To use it
   ## First install
-     ```bower install pl-github-profile;```
+     bower install pl-github-profile;
   ## Import
-      ```<link rel="import" href="pathtohtml/pl-github-profile.html">```   
+      <link rel="import" href="bower_components/pl-github-profile/build/default">   
   ## Use the tag
-      ```<pl-github-template username="yourGithubUsername"></pl-github-template>```   
+      <pl-github-template username="yourGithubUsername"></pl-github-template>   
+
+Now you need to put the html on a simple server to see working

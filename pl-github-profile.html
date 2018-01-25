@@ -1,56 +1,59 @@
+<script src="../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-<link rel="import" href="../../polymer/polymer-element.html">
-<link rel="import" href="../../iron-ajax/iron-ajax.html">
+<link rel="import" href="../iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="../iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
- <!-- Compiled and minified CSS -->
- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
 
- <!-- Compiled and minified JavaScript -->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/js/materialize.min.js"></script>
-         
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/js/materialize.min.js"></script>
+
 <dom-module id="pl-github-profile">
   <template>
-      <div id="carregando" class="preloader-wrapper small active">
-          <div class="spinner-layer spinner-green-only">
-            <div class="circle-clipper left">
-              <div class="circle"></div>
-            </div><div class="gap-patch">
-              <div class="circle"></div>
-            </div><div class="circle-clipper right">
-              <div class="circle"></div>
-            </div>
-          </div>
+    <div  id="carregando" style="display: unset;">
+    <div class="preloader-wrapper small active">
+      <div class="spinner-layer spinner-green-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
         </div>
-      <iron-ajax id="ajax"
-      url="https://api.github.com/users/{{username}}"
-      handle-as="json"
-      on-response="onResponse" auto></iron-ajax>
-    <div id="card" class="row" style="display:none;">
-    <div class="col s12 m3">
-      <div class="card">
-        <div class="card-image">
-          <img src="{{img}}" />
-          <span class="card-title">
-            {{name}}   @{{login}}</span>
+        <div class="gap-patch">
+          <div class="circle"></div>
         </div>
-        <div class="card-content">
-          <p>{{bio}}</p>
-          <b align="center">{{orgs}}</b>
-          <div class="row">
-            <div class="col s4"><i class="material-icons">book</i>{{repos}}</div> 
-            <div class="col s4"><i class="material-icons" >supervisor_account</i>{{followers}}</div>
-            <div class="col s4"><i class="material-icons">perm_identity</i>{{following}}</div>  
-          </div>
-          </div> 
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
       </div>
     </div>
   </div>
-    
-   
+    <iron-ajax id="ajax" url="https://api.github.com/users/{{username}}" handle-as="json" on-response="onResponse" auto></iron-ajax>
+    <div id="card" class="row" style="display:none;">
+      <div class="col s12 m3">
+        <div class="card">
+          <div class="card-image">
+            <img src="{{img}}" />
+            <span class="card-title">
+              {{name}} @{{login}}</span>
+          </div>
+          <div class="card-content">
+            <p>{{bio}}</p>
+            <b align="center">{{orgs}}</b>
+            <div class="row">
+              <div class="col s4">
+                <i class="material-icons">book</i>{{repos}}</div>
+              <div class="col s4">
+                <i class="material-icons">supervisor_account</i>{{followers}}</div>
+              <div class="col s4">
+                <i class="material-icons">perm_identity</i>{{following}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </template>
 
   <script>
@@ -62,51 +65,51 @@
      * @polymer
      * @demo demo/index.html
      */
-     Polymer({
-        is: 'pl-github-profile',
-        properties: {
-          img: {
-            type: String
-          },
-          orgs: {
-            type: String
-          },
-          repos: {
-            type: String
-          },
-          bio: {
-            type: String
-          },
-          followers: {
-            type: String
-          },
-          following: {
-            type: String
-          },
-          name: {
-            type: String
-          },
-          login: {
-            type: String
-          },
-          username:{
-            type:String
-          }
-          
+    Polymer({
+      is: 'pl-github-profile',
+      properties: {
+        img: {
+          type: String
         },
-        onResponse: function(response) {
-          document.getElementById('carregando').style.display='none';
-          document.getElementById('card').style.display='unset';
-          this.set('img',response.detail.response.avatar_url)
-          this.set('orgs',response.detail.response.company)
-          this.set('repos',response.detail.response.public_repos)
-          this.set('bio',response.detail.response.bio)
-          this.set('followers',response.detail.response.followers)
-          this.set('following',response.detail.response.following)
-          this.set('name',response.detail.response.name)
-          this.set('login',response.detail.response.login)                    
+        orgs: {
+          type: String
+        },
+        repos: {
+          type: String
+        },
+        bio: {
+          type: String
+        },
+        followers: {
+          type: String
+        },
+        following: {
+          type: String
+        },
+        name: {
+          type: String
+        },
+        login: {
+          type: String
+        },
+        username: {
+          type: String
         }
-      });
+
+      },
+      onResponse: function (response) {
+        this.$.carregando.style.display = 'none';
+        this.$.card.style.display = 'unset';
+        this.set('img', response.detail.response.avatar_url)
+        this.set('orgs', response.detail.response.company)
+        this.set('repos', response.detail.response.public_repos)
+        this.set('bio', response.detail.response.bio)
+        this.set('followers', response.detail.response.followers)
+        this.set('following', response.detail.response.following)
+        this.set('name', response.detail.response.name)
+        this.set('login', response.detail.response.login)
+      }
+    });
 
   </script>
 </dom-module>

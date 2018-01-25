@@ -1,27 +1,115 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
+<script src="../webcomponentsjs/webcomponents-lite.js"></script>
 
-    <title>pl-github-profile demo</title>
+<link rel="import" href="../iron-demo-helpers/demo-pages-shared-styles.html">
+<link rel="import" href="../iron-demo-helpers/demo-snippet.html">
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../iron-ajax/iron-ajax.html">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
 
-    <script src="../webcomponentsjs/webcomponents-lite.js"></script>
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/js/materialize.min.js"></script>
 
-    <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-    <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-    <link rel="import" href="/pl-github-profile.html">
-
-    <custom-style>
-      <style is="custom-style" include="demo-pages-shared-styles">
-      </style>
-    </custom-style>
-  </head>
-  <body>
-    <div class="vertical-section-container centered">
-      <h3>Basic pl-github-profile demo</h3>
-  
-          <pl-github-profile></pl-github-profile>
+<dom-module id="pl-github-profile">
+  <template>
+    <div  id="carregando" style="display: unset;">
+    <div class="preloader-wrapper small active">
+      <div class="spinner-layer spinner-green-only">
+        <div class="circle-clipper left">
+          <div class="circle"></div>
+        </div>
+        <div class="gap-patch">
+          <div class="circle"></div>
+        </div>
+        <div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+      </div>
     </div>
-  </body>
-</html>
+  </div>
+    <iron-ajax id="ajax" url="https://api.github.com/users/{{username}}" handle-as="json" on-response="onResponse" auto></iron-ajax>
+    <div id="card" class="row" style="display:none;">
+      <div class="col s12 m3">
+        <div class="card">
+          <div class="card-image">
+            <img src="{{img}}" />
+            <span class="card-title">
+              {{name}} @{{login}}</span>
+          </div>
+          <div class="card-content">
+            <p>{{bio}}</p>
+            <b align="center">{{orgs}}</b>
+            <div class="row">
+              <div class="col s4">
+                <i class="material-icons">book</i>{{repos}}</div>
+              <div class="col s4">
+                <i class="material-icons">supervisor_account</i>{{followers}}</div>
+              <div class="col s4">
+                <i class="material-icons">perm_identity</i>{{following}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </template>
+
+  <script>
+    /**
+     * `pl-github-profile`
+     * a pre defined element to see a profile with the best informations on github
+     *
+     * @customElement
+     * @polymer
+     * @demo demo/index.html
+     */
+    Polymer({
+      is: 'pl-github-profile',
+      properties: {
+        img: {
+          type: String
+        },
+        orgs: {
+          type: String
+        },
+        repos: {
+          type: String
+        },
+        bio: {
+          type: String
+        },
+        followers: {
+          type: String
+        },
+        following: {
+          type: String
+        },
+        name: {
+          type: String
+        },
+        login: {
+          type: String
+        },
+        username: {
+          type: String
+        }
+
+      },
+      onResponse: function (response) {
+        this.$.carregando.style.display = 'none';
+        this.$.card.style.display = 'unset';
+        this.set('img', response.detail.response.avatar_url)
+        this.set('orgs', response.detail.response.company)
+        this.set('repos', response.detail.response.public_repos)
+        this.set('bio', response.detail.response.bio)
+        this.set('followers', response.detail.response.followers)
+        this.set('following', response.detail.response.following)
+        this.set('name', response.detail.response.name)
+        this.set('login', response.detail.response.login)
+      }
+    });
+
+  </script>
+</dom-module>
