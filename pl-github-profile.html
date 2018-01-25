@@ -1,18 +1,41 @@
 <link rel="import" href="../../bower_components/polymer/polymer-element.html">
 <link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+ <!-- Compiled and minified CSS -->
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/css/materialize.min.css">
+
+ <!-- Compiled and minified JavaScript -->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-alpha.3/js/materialize.min.js"></script>
+         
 <dom-module id="pl-github-profile">
   <template>
       <iron-ajax id="ajax"
       url="https://api.github.com/users/{{username}}"
       handle-as="json"
       on-response="onResponse" auto></iron-ajax>
-    <img src="{{img}}"/><br/>
-    {{name}}   @{{login}}
-    <p>{{bio}}</p>
-    <b>{{orgs}}</b>
-    {{repos}}
-    {{followers}}
-    {{following}}
+    <div class="row">
+    <div class="col s12 m3">
+      <div class="card">
+        <div class="card-image">
+          <img src="{{img}}" />
+          <span class="card-title">
+            {{name}}   @{{login}}</span>
+        </div>
+        <div class="card-content">
+          <p>{{bio}}</p>
+          <b align="center">{{orgs}}</b>
+          <div class="row">
+            <div class="col s4"><i class="material-icons">book</i>{{repos}}</div> 
+            <div class="col s4"><i class="material-icons" >supervisor_account</i>{{followers}}</div>
+            <div class="col s4"><i class="material-icons">perm_identity</i>{{following}}</div>  
+          </div>
+          </div>
+        
+      </div>
+    </div>
+  </div>
+    
+   
   </template>
 
   <script>
