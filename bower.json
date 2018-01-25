@@ -3,7 +3,7 @@
   "description": "A pre defined element to see a profile with the best informations of github",
   "main": "pl-github-profile.html",
   "dependencies": {
-    "polymer": "Polymer/polymer#^2.0.0"
+    "http": "^3.24.10"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
@@ -12,5 +12,21 @@
   },
   "resolutions": {
     "polymer": "^2.0.0"
-  }
+  },
+  "homepage": "https://github.com/yanccprogramador/polymer-github-profile",
+  "keywords": [
+    "polymer",
+    "github"
+  ],
+  "authors": [
+    "yanccprogramador"
+  ],
+  "license": "apache2.0",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
