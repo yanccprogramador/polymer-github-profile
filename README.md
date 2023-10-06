@@ -1,3 +1,6 @@
+## DEPRECATED ##
+
+
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/yanccprogramador/polymer-github-profile)
 # \<pl-github-profile\>
 
